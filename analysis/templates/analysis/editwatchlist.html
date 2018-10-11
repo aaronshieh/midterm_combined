@@ -158,7 +158,7 @@
             </div>
             <!--MDB Tables-->
     <div>
-    <h2 id='aId'>{{accountId}}</h2>
+    <h2 id='mailbox'>{{accountId}}</h2>
     </div>
     </main>
 {% endblock %}
@@ -215,8 +215,17 @@ function loadTodo(datas){
         return datas
     } //close loadTodo
 //-------------------------------------------------------------
-function refresh(){
+function getId(){
+    var mailbox= $('#mailbox')
+    var cell= $('<td id="aId">{{accountId}}</td>')
+    mailbox.append(cell).css({'color':'white'})
     aId=$('#aId').text()
+    $('#mailbox').empty()
+    return aId
+}
+//-------------------------------------------------------------
+function refresh(){
+    aId=getId()
     idl=[]
     ail=[]
     eml=[]
@@ -391,14 +400,13 @@ $(document).ready(function() {
                     //--------------------然後比對watch list--------
                     $.ajax({
                         type:'GET',
-                        url:`/restapp/WatchList/?accountId=0&group=${group2add}&stocktag=${text}`
+                        url:`/restapp/WatchList/?accountId=${aId}&group=${group2add}&stocktag=${text}`
                         }).done(function(search2){
                                 //-----------如果不在本group自選股中 就加入新自選股吧---
                                 if (search2.length==0) {
                                     console.log("going to insert the item.....")
-                                    var count = gpl.reduce(function(n, val) {
-                                        return n + (val == group2add)
-                                        })
+                                    console.log(gpl)
+                                            var count = gpl.reduce(function(n, val) { return n + (val == group2add)},0)
                                     console.log(gpl)
                                     console.log(group2add)
                                     console.log(count)
@@ -454,7 +462,7 @@ $(document).ready(function() {
     // console.log(snl[0])
     // console.log(dtl[0])      
     })//close on function
-//--  ------------------------------------------------------
+//---------------------------------------------------------------
                 // $(document).ready(function(){
 
                 //     //jquery 新曾資料
@@ -472,16 +480,42 @@ $(document).ready(function() {
 
                 //     })
 
-// -------------------篩除自選股----------------------------------
-        // $(document).on('click','.btn.btn-danger.btn-sm',function(){
-        //     console.log('del pressed')
-        //     $(this).parents("tr").remove();
-        //     })
-                    // $('#btnAdd1').click(function(){
-                    //         $('#tb1').append("<tr><th scope="row">#</th><td>nnnn</td><td>TTTT</td><td><a href="#" class="btn btn-danger btn-sm">Drop</a></td></tr>");
-                    //     });
-
-        }) //---------close document ready-----------------
+// -------------------篩除一檔自選股----------------------------------
+    $(document).on('click','.btn.btn-danger.btn-sm',function(){
+        console.log("drop is clicked")
+        var group=$(this).parents('tbody').find('tr:first-child').find('th:first-child').text()
+        var index=$(this).parents('tr').find('td:first-child').text()
+        for (i=0;i<len;i++){
+            if (ail[i]==aId&&gpl[i]==group&&ixl[i]>=index){
+                if (ixl[i]==index){
+                    console.log('deleting this item')
+                    $.ajax({
+                            type:'DELETE',
+                            url:`/restapp/WatchList/?accountId=${aId}&group=${group}&index=${index}`
+                        }).done(function(){
+                            console.log("One row deleted!")
+                            })//close done funcion
+                            .fail(function(err){alert("DELETE ERROR!");console.log(data);console.log(err)})
+                }else{
+                    var data={
+                            "index": ixl[i]-1
+                            }
+                    $.ajax({
+                            type:'PATCH',
+                            url:`/restapp/WatchList/?accountId=${aId}&group=${gpl[i]}&index=${ixl[i]}`,
+                            data:data
+                        }).done(function(){
+                            console.log('Re-rank one index')
+                            })//close done funcion
+                            .fail(function(err){alert("PATCH ERROR!");console.log(data);console.log(err)})
+                }//close else
+                refresh()
+                console.log("refresh done!")
+            }
+        }
+        console.log(index)
+    })
+}) //---------close document ready-----------------
     </script>
 {% endblock %} 
 
