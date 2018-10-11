@@ -24,7 +24,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-3">
-                            <img id="coinImg" src="https://s2.coinmarketcap.com/static/img/coins/128x128/1.png">
+                            <img id="coinImg" src="">
                         </div>
                         <div class="col-9">
                             <select class="form-control" name="coins" id="coinList"></select>
@@ -120,6 +120,9 @@
                     $('#coinList').append(option);
                 }
             });
+
+            // initially, get & show price and balance of first cryptocurrency in list
+            $('#coinList').trigger('change');
         });
     })();
 
@@ -184,12 +187,6 @@
         }
         $('#balance').text("Current holdings: " + balance.toFixed(8));
     })}
-
-    // initially, get & show btc price, balance
-    getCoinPrice(1);
-    price_interval = setInterval(getCoinPrice.bind(null, 1), 5000);
-    getCoinBalance(2);
-    balance_interval = setInterval(getCoinBalance.bind(null, 2), 1000);
 
     // amount verification
     $('#amount').on("input", function(){

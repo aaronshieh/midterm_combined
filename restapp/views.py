@@ -10,21 +10,24 @@ class StockListViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filter_fields = '__all__'
     ordering_fields = '__all__'
+
 class WatchListViewSet(viewsets.ModelViewSet):
     queryset=WatchList.objects.all()
     serializer_class=WatchListSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filter_fields = '__all__'
     ordering_fields = '__all__'
+
 class MarketLogDViewSet(viewsets.ModelViewSet):
     queryset=MarketLogD.objects.all()
-    serializer_class=WatchListSerializer
+    serializer_class=MarketLogDSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filter_fields = '__all__'
     ordering_fields = '__all__'
+    
 class MarketLogDsViewSet(viewsets.ModelViewSet):
     queryset=MarketLogDs.objects.all()
-    serializer_class=WatchListSerializer
+    serializer_class=MarketLogDsSerializer
     filter_backends = (DjangoFilterBackend, OrderingFilter)
     filter_fields = '__all__'
     ordering_fields = '__all__'
