@@ -158,7 +158,7 @@
             </div>
             <!--MDB Tables-->
     <div>
-    <h2>{{stocks}}</h2>
+    <h2 id='aId'>{{accountId}}</h2>
     </div>
     </main>
 {% endblock %}
@@ -216,7 +216,8 @@ function loadTodo(datas){
     } //close loadTodo
 //-------------------------------------------------------------
 function refresh(){
-    aId=0
+    
+    aId=$('#aId').text()
     idl=[]
     ail=[]
     eml=[]

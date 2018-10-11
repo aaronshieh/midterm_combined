@@ -38,6 +38,10 @@ def index(request):
 def editwatchlist(request):
     mld=MarketLogD.objects.all()
     wl=WatchList.objects.filter(accountId=0)
+    if 'id' in request.session:
+        accountId = request.session['id']
+    else:
+        accountId=0
     print("first editing on git....")
     return render(request,'analysis/editwatchlist.html',locals())
 
