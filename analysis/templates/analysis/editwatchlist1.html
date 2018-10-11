@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'styles/dataupdate.css' %}">
+<style>
+
+</style>
+{% endblock %}  
+
+{% block content %}
+<table>
+    <thead id='th3'>
+        <tr>
+            <th></th>
+            <th colspan='2'><input type='text' class='tagtoadd'></th>
+            <th><input type="button" value="add" id="btnAdd3" class="btn btn-success btn-sm"></th>
+        </tr>
+        <tr>
+            <th scope="row">#3</th>
+            <th class="th-lg"><a>stock tag</a></th>
+            <th class="th-lg"><a>stock name</a></th>
+        </tr>
+    </thead>
+    <!--Table head-->
+    <!-- <br> -->
+    <!--Table body-->
+    <tbody id='tb3'>
+        {% for row in wl %}
+        {% if row.group == 1 %}
+        <tr>
+            <th scope="row">1</th>
+            <td>{{row.stocktag}}</td>
+            <td>{{row.stockname}}</td>
+            <td><a href="#" class="btn btn-danger btn-sm"><small>Drop</small></a></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+        {% for row in wl %}
+        {% if row.group == 2 %}
+        <tr>
+            <th scope="row">1</th>
+            <td>{{row.stocktag}}</td>
+            <td>{{row.stockname}}</td>
+            <td><a href="#" class="btn btn-danger btn-sm"><small>Drop</small></a></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+
+        {% for row in wl %}
+        {% if row.group == 3 %}
+        <tr>
+            <th scope="row">1</th>
+            <td>{{row.stocktag}}</td>
+            <td>{{row.stockname}}</td>
+            <td><a href="#" class="btn btn-danger btn-sm"><small>Drop</small></a></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'scripts/bootstrap.min.js' %}"></script>
+<!-- <script src="{% static 'scripts/jquery-3.3.1.min.js' %}"></script> -->
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
+<script type='text/javascript'>
+    console.log('document loaded')
+    $(document).ready(function() {
+        console.log('document loaded')
+        $(document).on('click','.btn.btn-danger.btn-sm',function(){
+            console.log('del pressed')
+            $(this).parents("tr").remove();
+            })
+        $(document).on('click','.btn.btn-success.btn-sm',function(){
+            console.log($(this).parent().parent().find('.tagtoadd').val())
+            mld.filter(stocktag=gettag)
+            $(this).parents('thead').next().append('<tr><th scope="row">#</th><td>nnnn</td><td>TTTT</td><td><a href="#" class="btn btn-danger btn-sm"><small>Drop</small></a></td></tr>')
+        })
+
+        // $('#btnAdd1').click(function(){
+        //         $('#tb1').append("<tr><th scope="row">#</th><td>nnnn</td><td>TTTT</td><td><a href="#" class="btn btn-danger btn-sm">Drop</a></td></tr>");
+        //     });
+        });
+    </script>
+{% endblock %}
+
+<!-- 
+$.ajax({
+    type: "GET",
+    //代表資料傳送的方式是用GET，也可以改成POST。
+    url: "/path/hello.php",
+    //代表要在背後執行接收的網頁程式的路徑。
+    cache：false
+    //不使用瀏覽器的快取
+    async:false
+    //非同步的選項，如果為false，瀏覽器會停止任何其他的呼叫，免得擾亂現在的呼叫，
+    改成true則反之。
+    data:"var1=var1&var2=var2",
+    //要傳遞的變數與變數值，此處是物件與值對應的方式，如果值是一個陣列，可以寫成這樣
+    如{some:["var1","var2"]}，就會變成some=var1&some=var2
+    processData:false,
+    //將原本不是xml時會自動將所發送的data轉成字串(String)的功能關掉
+    datatype: "script",
+    //伺服器端傳回來的資料型態，如果沒有指定，jQuery會自動依照其MIME來回應。
+    可以用的型態有
+    xml：回應一個xml格式的文件
+    html：回應一個html文件，包含所有html語法的標籤
+    script：執行指定的javascript，並將結果以純文字的格式回傳
+    json：回應一個javascript物件並內含JSON的格式
+    jsonp：以JSONP的格式回應
+    text：以純文字的格式回傳
+
+    success:function(){
+    //成功的時候，要執行的功能
+    }
+    
+    beforeSend：function(){
+    //在發送前執行某些功能
+    }
+    
+    complete：function(){
+    //在完成時執行的功能
+    }
+    
+    error：function(){
+    //執行失敗要執行的function，而且必需在此function中傳送三個參數
+    //XMLHttpRequest的物件
+    //一個描述失敗原因的字串
+    //一個錯誤例外處理的物件
+    }
+    
+    global：true
+    //決定是否啟動一些全域的Ajax功能，內定值是true
+    ifModified：false
+    //當提出請求時將檢視資料自從上次被請求之後是否被更新過，只有更新過才會執行
+    jsonp：
+    設定jsonp資料返回時解讀的功能function
+    timeout：單獨項請求設定的逾時時間(單位為微秒)
+    }); -->

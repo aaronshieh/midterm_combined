@@ -1,0 +1,487 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'styles/dataupdate.css' %}">
+<style>
+
+</style>
+{% endblock %}  
+
+{% block content %}
+  <main>
+    <!--MDB Tables-->
+    <div class="container mt-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <!-- Grid row -->
+                <div class="row">
+                    <!-- Grid column -->
+                    <div class="col-md-12">
+                        <h5 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">Search within table</h5>
+                        <div class="input-group md-form form-sm form-2 pl-0">
+                            <input class="form-control my-0 py-1 pl-3 purple-border" id='search1' type="text" placeholder="Search something here..." aria-label="Search">
+                            <span class="input-group-addon waves-effect purple lighten-2" id="basic-addon1"><a><i class="fa fa-search white-text" aria-hidden="true"></i></a></span>
+                        </div>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+                <div class="card">
+
+                    <div class="card-body">
+                        <!-- Grid row -->
+                        <div class="row">
+                            <!-- Grid column -->
+                            <div class="col-md-12">
+                                <h2 class="py-3 text-center font-bold font-up blue-text">Table of Watch List</h2>
+                            </div>
+                            <!-- Grid column -->
+                        </div>
+                        <!-- Grid row -->
+                        <div class="box">
+                            <div class="container">
+                                <div class="row">
+                                    
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <!--Table 1-->
+                                        <table class="table table-hover table-responsive mb-0">
+                                            <!--Table head-->
+                                            <thead id='th1'>
+                                                <tr>
+                                                    <th scope="row">{{row.group}}</th>
+                                                    <th class="th-lg"><a>stock tag</a></th>
+                                                    <th class="th-lg"><a>stock name</a></th>                                                   
+                                                    <div id="msg"></div>                                               
+                                                </tr>
+                                            </thead>
+                                            <!--Table head-->
+                                            <!--Table body-->
+                                            <tbody id='tb1'>
+                                                
+                                            </tbody>
+                                            <!--Table body-->
+                                        </table>
+
+                                    </div>	 
+                                    
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <!--Table 2-->
+                                        <table class="table table-hover table-responsive mb-0">
+                                            <!--Table head-->
+                                            <thead id='th2'>
+                                                <tr>
+                                                    <th scope="row">{{row.group}}</th>
+                                                    <th class="th-lg"><a>stock tag</a></th>
+                                                    <th class="th-lg"><a>stock name</a></th>
+                                                </tr>
+                                            </thead>
+                                            <!--Table head-->
+                                            <!--Table body-->
+                                            <tbody id='tb2'>
+                                                    
+                                            </tbody>
+                                            <!--Table body-->
+                                        </table>
+
+                                    </div>	 
+                                    
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    <!--Table 3-->
+                                        <table class="table table-hover table-responsive mb-0">
+                                            <!--Table head-->
+                                            <thead id='th3'>
+                                                <tr>
+                                                    <th scope="row">{{row.group}}</th>
+                                                    <th class="th-lg"><a>stock tag</a></th>
+                                                    <th class="th-lg"><a>stock name</a></th>
+                                                </tr>
+                                            </thead>
+                                            <!--Table head-->
+                                            <!--Table body-->
+                                            <tbody id='tb3'>
+                                                    
+                                            </tbody>
+                                            <!--Table body-->
+                                        </table>
+
+                                    </div>	
+                            
+                                </div>		
+                            </div>
+                        </div>
+
+                        <!--Bottom Table UI-->
+                        <div class="d-flex justify-content-center">
+                            <!--Pagination -->
+                            <nav class="my-4 pt-2">
+                                <ul class="pagination pagination-circle pg-blue mb-0">
+                                    <!--First-->
+                                    <li class="page-item disabled clearfix d-none d-md-block"><a class="page-link">First</a></li>
+                                    <!--Arrow left-->
+                                    <li class="page-item disabled">
+                                        <a class="page-link" aria-label="Previous">
+                                                <span aria-hidden="true">«</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                    </li>
+                                    <!--Numbers-->
+                                    <li class="page-item active"><a class="page-link">1</a></li>
+                                    <li class="page-item"><a class="page-link">2</a></li>
+                                    <li class="page-item"><a class="page-link">3</a></li>
+                                    <li class="page-item"><a class="page-link">4</a></li>
+                                    <li class="page-item"><a class="page-link">5</a></li>
+                                    <!--Arrow right-->
+                                    <li class="page-item">
+                                        <a class="page-link" aria-label="Next">
+                                                <span aria-hidden="true">»</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                    </li>
+                                    <!--First-->
+                                    <li class="page-item clearfix d-none d-md-block"><a class="page-link">Last</a></li>
+                                </ul>
+                            </nav>
+                            <!--/Pagination -->
+                        </div>
+                        <!--Bottom Table UI-->
+                    </div>
+                </div>
+            
+                <hr class="my-4">
+            
+                <div class="text-center darken-grey-text mb-4">
+                    <h3 class="font-bold mb-3"></h3>
+                    <a class="btn btn-danger btn-sm" href="#" target="_blank"></a>
+                </div>
+
+            </div>
+            <!--MDB Tables-->
+    <div>
+    <h2>{{stocks}}</h2>
+    </div>
+    </main>
+{% endblock %}
+
+{% block scripts %}
+
+<!-- <script src="{% static 'scripts/bootstrap.min.js' %}"></script> -->
+<!-- <script src="{% static 'scripts/jquery-3.3.1.min.js' %}"></script> -->
+
+<script type='text/javascript'>
+// ===================================================================
+// --------------刷新 watch list by jsObj------------------- -//
+function loadTodo(datas){
+        for(g=1;g<=3;g++){
+            var n = g.toString()
+            var tb =  $("#tb"+n)
+                console.log("#tb"+n)
+            var docFrag = $(document.createDocumentFragment())
+            //-------------寫新增輸入列 for each list-------------------------
+            var cell1 = $('<th></th>').text(n)
+            var cell2 = $('<td></td>').html("<input type='text' id='text'+n class='text2add' placeholder='請輸入股票代碼'>").attr('colspan','2')
+            var cell3 = $('<th></th>').html('<input type="button" value="add" id="btnAdd"+n class="btn btn-success btn-sm">')
+            //<tr><td><td><td>
+            var row = $('<tr></tr>').append([cell1,cell2,cell3])
+                // console.log(row)
+            //<tbody><tr>
+            docFrag.append(row)
+            tb.html("")//--寫入前先清空---------
+            tb.append(docFrag)
+        }//close for loop
+        console.log(len)
+        //-------------寫個股 for each list-------------------------
+        for(i=0;i<len;i++){
+            var idx=ixl[i]
+            var todo=datas[i]
+                // console.log(todo)
+            var n=gpl[i].toString()
+            var id=n.concat("-",idx)
+            // console.log(id)
+            var cell1 = $('<td></td>').text(todo.index)
+            var cell2 = $('<td></td>').text(todo.stocktag)//.attr('contenteditable','true')
+            var cell3 = $('<td></td>').text(todo.stockname)//.attr('contenteditable','true')
+            var cell4 = $('<td></td>').html('<a href="#" class="btn btn-danger btn-sm"><small>Drop</small></a>')
+            //<tr><td><td><td>
+            var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4]).attr({'class':'row-generated','id':id})
+            //<tbody><tr>
+            docFrag.append(row)
+            // var n = todo.group.toString()
+            var tb =  $("#tb"+n)
+            tb.append(docFrag)
+            }
+        // //close each function    
+        // console.log(datas)
+        return datas
+    } //close loadTodo
+//-------------------------------------------------------------
+function refresh(){
+    aId=0
+    idl=[]
+    ail=[]
+    eml=[]
+    gpl=[]
+    ixl=[]
+    stl=[]
+    snl=[]
+    dtl=[]
+    len=0
+    // //-------先讀入watch list via ajax-----------------------------------------
+    $.ajax({
+    type:'GET',
+    url:`/restapp/WatchList/?accountId=${aId}&ordering=group,index`
+    }).done(function(datas){
+        // console.log(datas)
+        // console.log(datas.length)
+        // console.log(datas[0])
+        len=datas.length
+        console.log(len)
+        for (i=0;i<len;i++){
+            idl.push(datas[i].id)
+            ail.push(datas[i].accountId)
+            eml.push(datas[i].email)
+            gpl.push(datas[i].group)
+            ixl.push(datas[i].index)
+            stl.push(datas[i].stocktag)
+            snl.push(datas[i].stockname)
+            dtl.push(datas[i].date)
+        }
+        // console.log(idl)
+        // console.log(snl)
+        // for (i=0;i<len;i++){
+        //     console.log(gpl[i])
+        // }
+        // console.log(Math.max.apply(null,ixl))
+    loadTodo(datas)
+    })//close done function
+}
+
+//----------------------------------------------
+$(document).ready(function() {
+    console.log('document loaded')
+//     console.log(idl)
+//     console.log(snl)        
+//     console.log(len)
+    refresh()
+
+
+
+// --------------刷新 watch list by GETs--------------- -//
+        function loadTodoG(g){
+        //     // for(g=1;g<4;g++) {
+        //         $.ajax({
+        //             type:'GET',
+        //             url:`/restapp/WatchList/?group=${g}&ordering=index`
+        //             }).done(function(datas){
+        //                 // console.log(datas)
+        //                 var n = g.toString()
+        //                 var tb =  $("#tb"+n)
+        //                     console.log("#tb"+n)
+        //                 var docFrag = $(document.createDocumentFragment())
+        //                 //-------------寫新增輸入列 for each list-------------------------
+        //                 var cell1 = $('<th></th>').text(n)
+        //                 var cell2 = $('<td></td>').html("<input type='text' id='text'+n class='text2add'>").attr('colspan','2')
+        //                 var cell3 = $('<th></th>').html('<input type="button" value="add" id="btnAdd"+n class="btn btn-success btn-sm">')
+        //                 //<tr><td><td><td>
+        //                 var row = $('<tr></tr>').append([cell1,cell2,cell3])
+        //                     // console.log(row)
+        //                 //<tbody><tr>
+        //                 docFrag.append(row)
+        //                 //-------------寫個股 for each list-------------------------
+        //                 $.each(datas,function(idx,todo){
+        //                     var cell1 = $('<td></td>').text(todo.index)
+        //                     var cell2 = $('<td></td>').text(todo.stocktag).attr('contenteditable','true')
+        //                     var cell3 = $('<td></td>').text(todo.stockname).attr('contenteditable','true')
+        //                     var cell4 = $('<td></td>').html('<a href="#" class="btn btn-danger btn-sm"><small>Drop</small></a>')
+        //                     //<tr><td><td><td>
+        //                     var row = $('<tr></tr>').append([cell1,cell2,cell3,cell4]).attr('id',g+todo.index)
+        //                     //<tbody><tr>
+        //                     docFrag.append(row)
+        //                     }) 
+        //                 //close each function
+        //                 console.log()
+        //                 tb.append(docFrag)
+        //             }) 
+        //             // close done function
+        //         // } 
+        //         // close for loop 
+            } //close loadTodo
+        // for(g=1;g<=3;g++) {loadTodo(g)}
+        // loadTodo()
+// -------------------搜尋自選股------------------------------
+    $(document).on('blur','#search1',function(){
+        var text = $(this).val()
+        stag=parseInt(text)
+        console.log(stag)
+        //-----------先比對stock list--------------
+        $.ajax({
+            type:'GET',
+            url:`/restapp/StockList/?stocktag=${text}`
+            }).done(function(search1){
+                        console.log(search1)
+                if (search1.length==0) {
+                    alert("所選股號不正確，台股無此檔個股。")
+                } else if(search1[0].selected==false){
+                    alert("所選股號不在資料庫中，請參考台灣50與中型100，或者加入付費會員。")
+                } else{
+                    console.log(search1[0].selected)
+                    console.log("search1 passed")
+                    // console.log(search1)
+                    //--------------------然後比對watch list--------
+                    $.ajax({
+                        type:'GET',
+                        url:`/restapp/WatchList/?accountId=${aId}&stocktag=${text}`
+                        }).done(function(search2){
+                                if (search2.length==0) {
+                                    alert("所選股號不在您的自選股中，請自行加入自選股。")
+                                }else if(search2.length==len){
+                                    // alert("NaN")
+                                    $(".row-generated").css({'background-color':''})
+                                }else{
+                                    // console.log(search2)
+                                    console.log("going to highlighting the item.....")
+                                    //-----clear background-color of all then highlight the searched
+                                    for (i=0;i<search2.length;i++){
+                                        gstr=search2[i].group
+                                        istr=search2[i].index
+                                        // id="#".concat(g,i)
+                                        console.log(gstr)
+                                        console.log(istr)
+                                        $(".row-generated").css({'background-color':''})
+                                        $("#"+gstr+"-"+istr).css({'background-color':'yellow'})
+                                    }
+                                    
+                                }
+                                console.log("watch list check ended!")
+                            })//close done function
+                            .fail(function(){alert("searching in watch list ERROR!")})
+                }
+            })//close done function
+            .fail(function(){alert("searching in stock list ERROR!")}) 
+        // console.log(datas[0][0])
+        console.log(idl[0])
+        console.log(ail[0])
+        console.log(eml[0])
+        console.log(gpl[0])
+        console.log(ixl[0])
+        console.log(stl[0])
+        console.log(snl[0])
+        console.log(dtl[0])
+    })//close on function
+// -------------------新增自選股------------------------------
+    $(document).on('click','.btn.btn-success.btn-sm',function(){
+        var text = $(this).parent().parent().find('.text2add').val()
+        var group2add = $(this).parent().parent().find("th:first").text()
+        console.log(text)
+        console.log(group2add)
+        //-----------先比對stock list--------------
+        $.ajax({
+            type:'GET',
+            url:`/restapp/StockList/?stocktag=${text}`
+            }).done(function(search1){
+                        console.log(search1)
+                if (search1.length==0) {
+                    alert("所選股號不正確，台股無此檔個股。")
+                } else if(search1[0].selected==false){
+                    alert("所選股號不在資料庫中，請參考台灣50與中型100，或者加入付費會員。")
+                } else{
+                    // console.log(search1[0].selected)
+                    // console.log("search1 passed")
+                    // console.log(search1)
+                    //--------------------然後比對watch list--------
+                    $.ajax({
+                        type:'GET',
+                        url:`/restapp/WatchList/?accountId=0&group=${group2add}&stocktag=${text}`
+                        }).done(function(search2){
+                                //-----------如果不在本group自選股中 就加入新自選股吧---
+                                if (search2.length==0) {
+                                    console.log("going to insert the item.....")
+                                    var count = gpl.reduce(function(n, val) {
+                                        return n + (val == group2add)
+                                        })
+                                    console.log(gpl)
+                                    console.log(group2add)
+                                    console.log(count)
+                                    date=new Date()
+                                    data={
+                                        "accountId": aId,
+                                        "email": "visitor@iii.org.tw",
+                                        "group": group2add,
+                                        "index": count+1,
+                                        "stocktag": text,
+                                        "stockname": search1[0].stockname,
+                                        "date": date.toISOString()
+                                        }
+                                    $.ajax({
+                                            type:'POST',
+                                            url:`/restapp/WatchList/`,
+                                            data:data
+                                        }).done(function(){
+                                            refresh()
+                                            console.log("refresh done!")
+                                            })//close done funcion
+                                            .fail(function(err){alert("POST ERROR!");console.log(data);console.log(err)})       
+                                }else if(search2.length>1){
+                                    // alert("NaN")
+                                }else{
+                                    alert("所選股號已經在您的這列自選股中。")
+                                    // console.log(search2)
+                                    //------highlight已存在自選股中之這檔股票
+                                    for (i=0;i<search2.length;i++){
+                                        gstr=search2[i].group
+                                        istr=search2[i].index
+                                        // id="#".concat(g,i)
+                                        console.log(gstr)
+                                        console.log(istr)
+                                        $(".row-generated").css({'background-color':''})
+                                        $("#"+gstr+"-"+istr).css({'background-color':'yellow'})
+                                    }
+                                    
+                                }//close else if
+                                console.log("watch list check ended!")
+                            })//close done function
+                            .fail(function(){alert("searching in watch list ERROR!")})
+                }
+            })//close done function
+            .fail(function(){alert("searching in stock list ERROR!")}) 
+    // console.log(datas[0][0])
+    // console.log(idl[0])
+    // console.log(ail[0])
+    // console.log(eml[0])
+    // console.log(gpl[0])
+    // console.log(ixl[0])
+    // console.log(stl[0])
+    // console.log(snl[0])
+    // console.log(dtl[0])      
+    })//close on function
+//--  ------------------------------------------------------
+                // $(document).ready(function(){
+
+                //     //jquery 新曾資料
+                //     $('#buttonSubmit').click(function(){    
+                //         var datas = {
+                //         "title": $('#InputTitle').val(),
+                //         "text": $('#InputText').val()
+                //     };
+
+                //     $.post('/api/todo/',datas,function(data){
+                //     $('#InputTitle').val('')
+                //     $('#InputText').val('')
+                //         loadTodo()
+                //     })
+
+                //     })
+
+// -------------------篩除自選股----------------------------------
+        // $(document).on('click','.btn.btn-danger.btn-sm',function(){
+        //     console.log('del pressed')
+        //     $(this).parents("tr").remove();
+        //     })
+                    // $('#btnAdd1').click(function(){
+                    //         $('#tb1').append("<tr><th scope="row">#</th><td>nnnn</td><td>TTTT</td><td><a href="#" class="btn btn-danger btn-sm">Drop</a></td></tr>");
+                    //     });
+
+        }) //---------close document ready-----------------
+    </script>
+{% endblock %} 
+

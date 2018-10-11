@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/index.css' %}">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="{% static 'styles/index.css' %}">
+{% endblock %}
+
+{% block styles %}
+<style>
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css);
+</style>
+{% endblock %}  
+
+{% block content %}
+  
+<div class="box" style="background-color: #eee">
+    <div class="container">
+     	<div class="row">
+			 
+			     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style='margin:1em; background-color: white'>
+               
+					<div class="box-part text-center">
+
+						<h2><i class="fas fa-cart-arrow-down" style="color:blue"></i></h2>
+						<div class="title">
+							<h4>My Watch List</h4>
+						</div>
+                        
+						<div class="text">
+							<span>Choose the companies you are watching. I will help you organize your watch lists and load the company infos for you to review.</span>
+						</div>
+                        
+						<a href="/analysis/editwatchlist/">Start Here <i class="far fa-arrow-alt-circle-right"></i></a>
+					 </div>
+				</div>	 
+				
+				 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style='margin:1em; background-color: white'>
+               
+					<div class="box-part text-center">
+					    
+						<!-- <img src="/analysis/static/images/chart-line.png" alt='chart-line.png'>                       -->
+						<h2><i class="fas fa-chart-line" style="color:blue"></i></h2>
+						<div class="title">
+							<h4>Market Watch</h4>
+						</div>
+                        
+						<div class="text">
+							<span>The financial market is always dynamic and sometimes unreasonable. See the recent perfrmance of your watch list.</span>
+						</div>
+                        
+						<a href="/analysis/marketwatch/">Start Here <i class="far fa-arrow-alt-circle-right"></i></a>
+                        
+					 </div>
+				</div>	 
+				
+				 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style='margin:1em; background-color: white'>
+               
+					<div class="box-part text-center">
+                        
+						<!-- <img src="/analysis/static/images/chart-bar.png" alt='chart-bar.png'> -->
+						<h2><i class="fas fa-chart-bar" style="color:blue"></i></h2>
+						<div class="title">
+							<h4>Company Financials</h4>
+						</div>
+                        
+						<div class="text">
+							<span>If you are confused by the pouring press releases and market rumors arround you, do some homework and let the numbers talk.. </span>
+						</div>
+                        
+						<a href="#">Start Here <i class="far fa-arrow-alt-circle-right"></i></a>
+                        
+					 </div>
+				</div>	 
+				
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style='margin:1em; background-color: white'>
+               
+					<div class="box-part text-center">
+                        
+                        <!-- <img src="/analysis/static/images/download.png" alt='download.png'> -->
+						<h2><i class="fas fa-download" style="color:blue"></i></h2>
+						<div class="title">
+							<h4>Data Update</h4>
+						</div>
+                        
+						<div class="text">
+							<span>Is the data in the log out of date? Update all the numbers here. Of course you need an admin account to do so or ask the webmaster for help. </span>
+						</div>
+                        
+						<a href="/analysis/dataupdate/">Start Here <i class="far fa-arrow-alt-circle-right"></i></a>
+                        
+					 </div>
+				</div>	 
+				
+				 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style='margin:1em; background-color: white'>
+               
+					<div class="box-part text-center">
+					    
+					    <h2><i class="fab fa-bitcoin" style="color:blue"></i></h2>
+						<div class="title">
+							<h4>Trade Bit Coin</h4>
+						</div>
+                        
+						<div class="text">
+							<span>Curious about the trendy crypto currency things? Go cool with the Bit Coin trading simulation platform provided by genius Aeron Hsieh. </span>
+						</div>
+                        
+						<a href="/trading_simulator/">Start Here <i class="far fa-arrow-alt-circle-right"></i></a>
+                        
+					 </div>
+				</div>	 
+				
+				 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" style='margin:1em; background-color: white'>
+               
+					<div class="box-part text-center">
+                        
+                        <h2><i class="fas fa-home" style="color:blue"></i></h2>
+						<div class="title">
+							<h4>Home Page</h4>
+						</div>
+                        
+						<div class="text">
+							<span>The world doesn't stop when you think you have all the things done. Go back to the home page where you can see the most recent news.</span>
+						</div>
+                        
+						<a href="/">Start Here <i class="far fa-arrow-alt-circle-right"></i></a>
+                        
+					 </div>
+				</div>
+		
+		</div>		
+    </div>
+</div>
+  {% endblock %}

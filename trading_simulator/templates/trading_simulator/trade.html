@@ -1,0 +1,310 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% include 'trading_simulator/nav.html' %}
+<style>
+    input[type=number] {
+        border-radius:5px; 
+        padding:3px;
+    }
+</style>
+<div class="jumbotron" style="background-color:white; padding:50px 150px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-8 mx-auto">
+                <h1 class="display-4">Trade</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-8 mx-auto" id="tradediv" style="background:rgb(240, 240, 240);padding:50px;border-radius: 10px;">
+                <label for="coins"><h3>Select a coin to trade:</h3></label>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-3">
+                            <img id="coinImg" src="https://s2.coinmarketcap.com/static/img/coins/128x128/1.png">
+                        </div>
+                        <div class="col-9">
+                            <select class="form-control" name="coins" id="coinList"></select>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h3 id="USDbalance">Funds available:</h3>
+                <hr>
+                <h3 id="price">Current price: </h3>
+                <span id="priceUpdatedTime">Last updated:</span>
+                <hr>
+                <h3 id="balance">Current holdings: </h3>
+                <hr>
+                <div class="row">
+                    <div class="col-8 mx-auto">
+                        <input type="number" id="amount" class="amount" name="amount" placeholder="enter amount" autocomplete="off"> 
+                        <input type="button" id="buy" class="btn btn-success buy" name="buy" value="BUY" data-toggle="modal" data-target="#orderConfirmModal" disabled>
+                        <input type="button" id="sell" class="btn btn-danger sell" name="sell" value="SELL" data-toggle="modal" data-target="#orderConfirmModal" disabled>
+                        <input type="button" id="clear" class="btn btn-secondary clear" name="clear" value="CLEAR">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 mx-auto">
+                <hr>
+                <div id="orderAlert" class="alert alert-success" role="alert">
+                </div>
+            </div>
+        </div>
+    </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="orderConfirmModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderConfirmModalTitle">Order Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="orderConfirmModalBody">
+          <h6 id="modal-coin-name">coin name</h6>
+          <h6 id="modal-amount">amount</h6>
+          <h6 id="modal-price">price</h6>
+          <hr>
+          <h5 id="modal-total">total</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btn-modal-dismiss" data-dismiss="modal">CLOSE</button>
+          <button type="button" class="btn btn-success" id="btn-modal-action">[action]</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/getCookie.js' %}"></script>
+<script>
+    var csrftoken = getCookie('csrftoken');
+    var USDbalance;
+    var price;
+    var balance;
+
+    $('#orderAlert').hide();
+
+    // Get list of all coins in db
+    var coinList = [];
+    (function getCoinList(){
+        $.ajax({
+            method: "POST",
+            url: "/trading_simulator/getCoins/",
+            headers: {'X-CSRFToken':csrftoken},
+        })
+        .done(function( msg ) {
+            console.log(msg);
+            $.each(msg, function(index, coin){
+                coinList.push({'coinId':coin.pk,
+                                'name':coin.fields.name, 
+                                'symbol':coin.fields.symbol,
+                                'cmcId':coin.fields.cmcId});
+            });
+            console.log(coinList);
+
+            // Add coins to list
+            $.each(coinList, function(idx, coin){
+                if(coin.coinId!=1){ // not usd
+                    var option = $('<option></option>');
+                    option.val(coin.cmcId);
+                    option.append(`${coin.name.toUpperCase()} (${coin.symbol.toUpperCase()})`);
+                    $('#coinList').append(option);
+                }
+            });
+        });
+    })();
+
+    // change coin in dropdown list
+    var price_interval;
+    var balance_interval;
+    $('#coinList').change(function(){
+        if(price_interval){
+            clearInterval(price_interval);
+        }
+        if(balance_interval){
+            clearInterval(balance_interval);
+        }
+        
+        // get price
+        let cmcId = $(this).children(':selected').val();
+        getCoinPrice(cmcId);
+        price_interval = setInterval(getCoinPrice.bind(null, cmcId), 5000);
+
+        // get image
+        $('#coinImg').attr('src', `https://s2.coinmarketcap.com/static/img/coins/128x128/${cmcId}.png`);
+
+        // show coin balance
+        let coinId;
+        $.each(coinList, function(idx, coin){
+            if(coin.cmcId == cmcId){
+                coinId = coin.coinId;
+            }
+        });
+        getCoinBalance(coinId);
+        balance_interval = setInterval(getCoinBalance.bind(null, coinId), 1000);
+    });
+
+    // get price from CMC
+    function getCoinPrice(cmcId){
+        $.ajax({
+        method: "GET",
+        // url: "https://api.coinmarketcap.com/v2/ticker/"+cmcId+"/",
+        url: "/trading_simulator/getCMCcoin/",
+        data: {'ticker':cmcId}
+    })
+    .done(function( msg ) {
+        //console.log(msg.data.quotes.USD.price);
+        price = msg.data.quotes.USD.price;
+        let datetime = moment(new Date);
+        $('#priceUpdatedTime').fadeTo(500,0.3)
+            .text(`Last updated: ${datetime.format('h:mm:ss a')}`)
+            .fadeTo(500,1);
+        $('#price').text("Current " + msg.data.symbol + " price: "+ msg.data.quotes.USD.price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + " USD");
+    })}
+
+    function getCoinBalance(coinId){
+        $.ajax({
+        method: "POST",
+        url: "/trading_simulator/getCoinBalance/"+coinId+"/",
+        headers: {'X-CSRFToken':csrftoken},
+    })
+    .done(function( msg ) {
+        balance = 0;
+        if(msg.length){
+            balance = msg[0].fields.coinBalance;
+        }
+        $('#balance').text("Current holdings: " + balance.toFixed(8));
+    })}
+
+    // initially, get & show btc price, balance
+    getCoinPrice(1);
+    price_interval = setInterval(getCoinPrice.bind(null, 1), 5000);
+    getCoinBalance(2);
+    balance_interval = setInterval(getCoinBalance.bind(null, 2), 1000);
+
+    // amount verification
+    $('#amount').on("input", function(){
+        if($(this).val() == false || $(this).val() <= 0){
+            $('.btn.buy').prop("disabled", true);
+            $('.btn.sell').prop("disabled", true);
+        } else {
+            $('.btn.buy').prop("disabled", false);          
+            $('.btn.sell').prop("disabled", false);
+        }
+    });
+
+    // clear amount input field
+    $('.btn.clear').click(function(){
+        $('#amount').val("").trigger('input');
+    });
+
+    $('#balance').click(function(){
+        $('#amount').val(/\d+\.\d+/.exec($(this).text())).trigger('input');
+    });
+
+    // order confirm 
+    $('.btn.buy, .btn.sell').click(function(){
+        $('#btn-modal-action').off("click");
+        let amount = $('#amount').val();
+        let type = $(this).val();
+        
+        let coinId;
+        let coinSymbol;
+        let coinName;
+        let cmcId = $('#coinList').children(':selected').val();
+        $.each(coinList, function(idx, coin){
+            if(coin.cmcId == cmcId){
+                coinId = coin.coinId;
+                coinName = coin.name;
+                coinSymbol = coin.symbol;
+            }
+        });
+
+        $('#orderConfirmModalTitle').text(`${type} Order Confirmation`);
+        $('#orderConfirmModalBody > #modal-coin-name').text(`COIN: ${coinName.toUpperCase()}`);
+        $('#orderConfirmModalBody > #modal-amount').text(`AMOUNT: ${amount} ${coinSymbol.toUpperCase()}`);
+        $('#orderConfirmModalBody > #modal-price').text(`PRICE: ${price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} USD`);
+        $('#orderConfirmModalBody > #modal-total').text(`TOTAL: ${(amount*price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} USD`);
+        // $('#orderConfirmModalBody').text(`${type} ${amount} ${coinName} at ${price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')} USD per ${coinName} for a total of ${amount*price}?`);
+        $('#btn-modal-action').text(`${type}`);
+        if(type == 'BUY'){
+            $('#btn-modal-action').removeClass("btn-danger");
+            $('#btn-modal-action').addClass("btn-success");
+        } else if(type == 'SELL'){
+            $('#btn-modal-action').removeClass("btn-success");
+            $('#btn-modal-action').addClass("btn-danger");
+        }
+    
+        $('#btn-modal-action').click(placeOrder.bind(null, price, amount, type, coinId));
+
+        function placeOrder(price, amount, type, coinId){
+            $('#btn-modal-action').off("click");
+            console.log("==placeOrder==");
+            console.log("amount: " + amount);
+            console.log("type: " + type);
+            console.log("coinId: " + coinId);
+            console.log("price: " + price);    
+            console.log("==============");
+            if(amount > 0)
+                trade(price, amount, type, coinId);
+            $('#btn-modal-dismiss').trigger("click");
+        };
+    });
+
+    function trade(price, amount, type, coinId){
+        console.log("sending trade...");
+        $.ajax({
+        method: "POST",
+        url: "/trading_simulator/trade/",
+        data: {'price':price, 'amount':amount, 'type':type, 'coinId':coinId},
+        headers: {'X-CSRFToken':csrftoken},
+    })
+    .done(function( msg ) {
+        console.log(msg);
+        if(msg == 'success'){
+            $('#orderAlert').stop()
+                .fadeOut()
+                .text(`${type} order successful!`)
+                .removeClass('alert-danger')
+                .addClass('alert-success')
+                .fadeIn(500)
+                .delay(1500)
+                .fadeOut(2000);
+
+        } else if(msg == 'failed'){
+            $('#orderAlert').stop()
+                .fadeOut()
+                .text(`${type} order failed!`)
+                .removeClass('alert-success')
+                .addClass('alert-danger')
+                .fadeIn(500)
+                .delay(1500)
+                .fadeOut(2000);
+        }
+    })}
+
+    function updateUSDBalance(){
+        $.ajax({
+        method: "POST",
+        url: "/trading_simulator/getCoinBalance/1/",
+        headers: {'X-CSRFToken':csrftoken},
+    })
+    .done(function( msg ) {
+        USDbalance = msg[0].fields.coinBalance;
+        $('#USDbalance').text("Funds available: " + USDbalance.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + " USD");
+    })}
+
+    updateUSDBalance();
+    var t2 = setInterval(updateUSDBalance, 1000);
+
+</script>
+{% endblock %}
