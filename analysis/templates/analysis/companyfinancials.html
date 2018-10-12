@@ -10,156 +10,118 @@
 
 {% block content %}
   <main>
-    <!--MDB Tables-->
+          <!--MDB Tables-->
     <div class="container mt-4">
-        <div class="card mb-4">
-            <div class="card-body">
-                <!-- Grid row -->
-                <div class="row">
-                    <!-- Grid column -->
-                    <div class="col-md-12">
-                        <h5 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">Search within table</h5>
-                        <div class="input-group md-form form-sm form-2 pl-0">
-                            <input class="form-control my-0 py-1 pl-3 purple-border" id='search1' type="text" placeholder="Search something here..." aria-label="Search">
-                            <span class="input-group-addon waves-effect purple lighten-2" id="basic-addon1"><a><i class="fa fa-search white-text" aria-hidden="true"></i></a></span>
-                        </div>
-                    </div>
-                    <!-- Grid column -->
-                </div>
-                <!-- Grid row -->
-                <div class="card">
-
-                    <div class="card-body">
-                        <!-- Grid row -->
-                        <div class="row">
-                            <!-- Grid column -->
-                            <div class="col-md-12">
-                                <h2 class="py-3 text-center font-bold font-up blue-text">Table of Watch List</h2>
-                            </div>
-                            <!-- Grid column -->
-                        </div>
-                        <!-- Grid row -->
-                        <div class="box">
-                            <div class="container">
-                                <div class="row">
-                                    
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <!--Table 1-->
-                                        <table class="table table-hover table-responsive mb-0">
-                                            <!--Table head-->
-                                            <thead id='th1'>
-                                                <tr>
-                                                    <th scope="row">{{row.group}}</th>
-                                                    <th class="th-lg"><a>stock tag</a></th>
-                                                    <th class="th-lg"><a>stock name</a></th>                                                   
-                                                    <div id="msg"></div>                                               
-                                                </tr>
-                                            </thead>
-                                            <!--Table head-->
-                                            <!--Table body-->
-                                            <tbody id='tb1'>
-                                                
-                                            </tbody>
-                                            <!--Table body-->
-                                        </table>
-
-                                    </div>	 
-                                    
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <!--Table 2-->
-                                        <table class="table table-hover table-responsive mb-0">
-                                            <!--Table head-->
-                                            <thead id='th2'>
-                                                <tr>
-                                                    <th scope="row">{{row.group}}</th>
-                                                    <th class="th-lg"><a>stock tag</a></th>
-                                                    <th class="th-lg"><a>stock name</a></th>
-                                                </tr>
-                                            </thead>
-                                            <!--Table head-->
-                                            <!--Table body-->
-                                            <tbody id='tb2'>
-                                                    
-                                            </tbody>
-                                            <!--Table body-->
-                                        </table>
-
-                                    </div>	 
-                                    
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <!--Table 3-->
-                                        <table class="table table-hover table-responsive mb-0">
-                                            <!--Table head-->
-                                            <thead id='th3'>
-                                                <tr>
-                                                    <th scope="row">{{row.group}}</th>
-                                                    <th class="th-lg"><a>stock tag</a></th>
-                                                    <th class="th-lg"><a>stock name</a></th>
-                                                </tr>
-                                            </thead>
-                                            <!--Table head-->
-                                            <!--Table body-->
-                                            <tbody id='tb3'>
-                                                    
-                                            </tbody>
-                                            <!--Table body-->
-                                        </table>
-
-                                    </div>	
-                            
-                                </div>		
+            <div class="card mb-4">
+                <div class="card-body">
+                    <!-- Grid row -->
+                    <div class="row">
+                        <!-- Grid column -->
+                        <div class="col-md-12">
+                            <h5 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">Search within table</h5>
+                            <div class="input-group md-form form-sm form-2 pl-0">
+                                <input class="form-control my-0 py-1 pl-3 purple-border" id='search1' type="text" placeholder="Search something here..." aria-label="Search">
+                                <span class="input-group-addon waves-effect purple lighten-2" id="basic-addon1"><a><i class="fa fa-search white-text" aria-hidden="true"></i></a></span>
                             </div>
                         </div>
-
-                        <!--Bottom Table UI-->
-                        <div class="d-flex justify-content-center">
-                            <!--Pagination -->
-                            <nav class="my-4 pt-2">
-                                <ul class="pagination pagination-circle pg-blue mb-0">
-                                    <!--First-->
-                                    <li class="page-item disabled clearfix d-none d-md-block"><a class="page-link">First</a></li>
-                                    <!--Arrow left-->
-                                    <li class="page-item disabled">
-                                        <a class="page-link" aria-label="Previous">
-                                                <span aria-hidden="true">«</span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                    </li>
-                                    <!--Numbers-->
-                                    <li class="page-item active"><a class="page-link">1</a></li>
-                                    <li class="page-item"><a class="page-link">2</a></li>
-                                    <li class="page-item"><a class="page-link">3</a></li>
-                                    <li class="page-item"><a class="page-link">4</a></li>
-                                    <li class="page-item"><a class="page-link">5</a></li>
-                                    <!--Arrow right-->
-                                    <li class="page-item">
-                                        <a class="page-link" aria-label="Next">
-                                                <span aria-hidden="true">»</span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
-                                    </li>
-                                    <!--First-->
-                                    <li class="page-item clearfix d-none d-md-block"><a class="page-link">Last</a></li>
-                                </ul>
-                            </nav>
-                            <!--/Pagination -->
-                        </div>
-                        <!--Bottom Table UI-->
+                        <!-- Grid column -->
                     </div>
+                    <!-- Grid row -->
+                    <div class="card">
+    
+                        <div class="card-body">
+                            <!-- Grid row -->
+                            <div class="row">
+                                <!-- Grid column -->
+                                <div class="col-md-12">
+                                    <h2 class="py-3 text-center font-bold font-up blue-text">Table of Watch List</h2>
+                                </div>
+                                <!-- Grid column -->
+                            </div>
+                            <!-- Grid row -->
+                            <div class="box">
+                                <div class="container">
+                                    <div class="row">
+                                        
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <!--Table 1-->
+                                            <table class="table table-hover table-responsive mb-0">
+                                                <!--Table head-->
+                                                <thead id='th1'>
+                                                    <tr>
+                                                        <th scope="row">{{row.group}}</th>
+                                                        <th class="th-lg"><a>stock tag</a></th>
+                                                        <th class="th-lg"><a>stock name</a></th>
+                                                        <th class="th-lg"><a></a>前一季</th>    
+                                                        <th class="th-lg"><a></a>兩季前</th>    
+                                                        <th class="th-lg"><a></a>前一季</th>                                                     
+                                                        <div id="msg"></div>                                               
+                                                    </tr>
+                                                </thead>
+                                                <!--Table head-->
+                                                <!--Table body-->
+                                                <tbody id='tb1'>
+                                                    
+                                                </tbody>
+                                                <!--Table body-->
+                                            </table>
+    
+                                        </div>	 
+                                        
+                                
+                                    </div>		
+                                </div>
+                            </div>
+    
+                            <!--Bottom Table UI-->
+                            <div class="d-flex justify-content-center">
+                                <!--Pagination -->
+                                <nav class="my-4 pt-2">
+                                    <ul class="pagination pagination-circle pg-blue mb-0">
+                                        <!--First-->
+                                        <li class="page-item disabled clearfix d-none d-md-block"><a class="page-link">First</a></li>
+                                        <!--Arrow left-->
+                                        <li class="page-item disabled">
+                                            <a class="page-link" aria-label="Previous">
+                                                    <span aria-hidden="true">«</span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                        </li>
+                                        <!--Numbers-->
+                                        <li class="page-item active"><a class="page-link">1</a></li>
+                                        <li class="page-item"><a class="page-link">2</a></li>
+                                        <li class="page-item"><a class="page-link">3</a></li>
+                                        <li class="page-item"><a class="page-link">4</a></li>
+                                        <li class="page-item"><a class="page-link">5</a></li>
+                                        <!--Arrow right-->
+                                        <li class="page-item">
+                                            <a class="page-link" aria-label="Next">
+                                                    <span aria-hidden="true">»</span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                        </li>
+                                        <!--First-->
+                                        <li class="page-item clearfix d-none d-md-block"><a class="page-link">Last</a></li>
+                                    </ul>
+                                </nav>
+                                <!--/Pagination -->
+                            </div>
+                            <!--Bottom Table UI-->
+                        </div>
+                    </div>
+                
+                    <hr class="my-4">
+                
+                    <div class="text-center darken-grey-text mb-4">
+                        <h3 class="font-bold mb-3"></h3>
+                        <a class="btn btn-danger btn-sm" href="#" target="_blank"></a>
+                    </div>
+    
                 </div>
-            
-                <hr class="my-4">
-            
-                <div class="text-center darken-grey-text mb-4">
-                    <h3 class="font-bold mb-3"></h3>
-                    <a class="btn btn-danger btn-sm" href="#" target="_blank"></a>
-                </div>
-
-            </div>
-            <!--MDB Tables-->
-    <div>
-    <h2 id='mailbox'>{{accountId}}</h2>
-    </div>
+                <!--MDB Tables-->
+        <div>
+        <h2 id='mailbox'>{{accountId}}</h2>
+        </div>
     </main>
 {% endblock %}
 
@@ -170,18 +132,39 @@
 
 <script type='text/javascript'>
 // ===================================================================
+// -----------------準備資料-----------------------------------
+financials={'1-DebtsRatio9':'','3-GPMargin9':'6-NPMargin9','6-NPMargin9':'','7-ROE9.csv':'','9-RevenueGrowthYoY9':'','11-EPSafterTax9':'','14-QuarterEndStockPrice9':'','15-BVperShare9':''}
+
+}
+
+lmap9=[['variable',Tw50,'filename']]
+lmap9.append(['dbr9',DebtsRatio9,'analysis/1-DebtsRatio9.csv'])
+// lmap9.append(['qkr9',QuickRatio9,'analysis/2-QuickRatio9.csv'])
+lmap9.append(['gpm9',GPMargin9,'analysis/3-GPMargin9.csv'])
+// lmap9.append(['',Tw50,'analysis/4-.csv'])
+// lmap9.append(['opm9',OPMargin9,'analysis/5-OPMargin9.csv'])
+lmap9.append(['npm9',NPMargin9,'analysis/6-NPMargin9.csv'])
+lmap9.append(['roe9',ROE9,'analysis/7-ROE9.csv'])
+// lmap9.append(['rgq9',RevenueGrowthQoQ9,'analysis/8-RevenueGrowthQoQ9.csv'])
+lmap9.append(['rgy9',RevenueGrowthYoY9,'analysis/9-RevenueGrowthYoY9.csv'])
+// lmap9.append(['epsfop9',EPSfromOP9,'analysis/10-EPSfromOP9.csv'])
+lmap9.append(['epsatx9',EPSafterTax9,'analysis/11-EPSafterTax9.csv'])
+// lmap9.append(['epsytd9',EPSYTD9,'analysis/12-EPSYTD9.csv'])
+// lmap9.append(['pbr9',PBRatio9,'analysis/13-PBRatio9.csv'])
+lmap9.append(['qesp9',QuarterEndStockPrice9,'analysis/14-QuarterEndStockPrice9.csv'])
+lmap9.append(['bvps9',BVperShare9,'analysis/15-BVperShare9.csv'])
+
 // --------------刷新 watch list by jsObj------------------- -//
 function loadTodo(datas){
-        for(g=1;g<=3;g++){
+        for(g=1;g<=1;g++){
             var n = g.toString()
             var tb =  $("#tb"+n)
                 console.log("#tb"+n)
-            tb.empty()
             var docFrag = $(document.createDocumentFragment())
             //-------------寫新增輸入列 for each list-------------------------
             var cell1 = $('<th></th>').text(n)
             var cell2 = $('<td></td>').html("<input type='text' id='text'+n class='text2add' placeholder='請輸入股票代碼'>").attr('colspan','2')
-            var cell3 = $('<th></th>').html('<input type="button" value="add" id="btnAdd"+n class="btn btn-success btn-sm">')
+            var cell3 = $('<th></th>').html('<input type="button" value="change" id="btnAdd"+n class="btn btn-success btn-sm">')
             //<tr><td><td><td>
             var row = $('<tr></tr>').append([cell1,cell2,cell3])
                 // console.log(row)
@@ -199,7 +182,7 @@ function loadTodo(datas){
             var n=gpl[i].toString()
             var id=n.concat("-",idx)
             // console.log(id)
-            var cell1 = $('<td></td>').text(todo.index).attr('id',todo.id)
+            var cell1 = $('<td></td>').text(todo.index)
             var cell2 = $('<td></td>').text(todo.stocktag)//.attr('contenteditable','true')
             var cell3 = $('<td></td>').text(todo.stockname)//.attr('contenteditable','true')
             var cell4 = $('<td></td>').html('<a href="#" class="btn btn-danger btn-sm"><small>Drop</small></a>')
@@ -482,67 +465,38 @@ $(document).ready(function() {
                 //     })
 
 // -------------------篩除一檔自選股----------------------------------
-function deleteOne(i, group, index, id){
-    
-                console.log('i='+i)
-                console.log('ixl[i]='+ixl[i])
-            //---------if editing needed-----------
-            if (ail[i]==aId&&gpl[i]==group&&ixl[i]>=index){
-
-                if (ixl[i]==index){
-                    console.log('deleting this item')
-                    $.ajax({
-                            type:'DELETE',
-                            url:`/restapp/WatchList/${id}`
-                        }).done(function(){
-                            console.log("One row deleted!")
-                            })//close done funcion
-                            .fail(function(err){console.log(data);console.log(err)})//alert("DELETE ERROR!");
-                }else{
-                    $.ajax({
-                            type:'GET',
-                            url:`/restapp/WatchList/?accountId=${aId}&group=${gpl[i]}&index=${ixl[i]}`
-                        }).done(function(datas){
-                            id=datas[0].id
-                            console.log('id='+id)
-                            console.log('i:'+i + '  ixl[i]:'+ixl[i] + '  len:' + len);//ixl[i]-1)
-                            var data={"index": ixl[i]-1}
-                            
-                            $.ajax({
-                                    type:'PATCH',
-                                    url:`/restapp/WatchList/${id}/`,
-                                    data:data
-                                }).done(function(){
-                                    console.log('Re-rank one index')
-                                    if(i==len-1){refresh()}
-                                    })//close done funcion
-                                    .fail(function(err){console.log(data);console.log(err)})//alert("PATCH ERROR!");
-
-                            })//close done funcion
-                            .fail(function(err){console.log(data);console.log(err)})//alert("PATCH ERROR!");
-                }//close if & else
-
-            }//close if editing needed
-
-}
     $(document).on('click','.btn.btn-danger.btn-sm',function(){
         console.log("drop is clicked")
         var group=$(this).parents('tbody').find('tr:first-child').find('th:first-child').text()
         var index=$(this).parents('tr').find('td:first-child').text()
-        var id=$(this).parents('tr').find('td:first-child').attr('id')
-        console.log('id='+id)
-        //------visit list-------------------
-        console.log(gpl)
-        console.log(ixl)
-        console.log('index='+index)
         for (i=0;i<len;i++){
-               deleteOne(i, group, index, id) 
-        } //close for loop
-            console.log('go to refresh')
-            refresh()
-            console.log("refresh done!")
-    }) //close 刪除自選股
+            if (ail[i]==aId&&gpl[i]==group&&ixl[i]>=index){
+                if (ixl[i]==index){
+                    console.log('deleting this item')
+                    $.ajax({
+                            type:'DELETE',
+                            url:`/restapp/WatchList/?accountId=${aId}&group=${group}&index=${index}`
+                        }).done(function(){
+                            console.log("One row deleted!")
+                            })//close done funcion
+                            .fail(function(err){alert("DELETE ERROR!");console.log(data);console.log(err)})
+                }else{
+                    var data={"index": ixl[i]-1}
+                    $.ajax({
+                            type:'PATCH',
+                            url:`/restapp/WatchList/?accountId=${aId}&group=${gpl[i]}&index=${ixl[i]}`,
+                            data:data
+                        }).done(function(){
+                            console.log('Re-rank one index')
+                            })//close done funcion
+                            .fail(function(err){alert("PATCH ERROR!");console.log(data);console.log(err)})
+                }//close else
+                refresh()
+                console.log("refresh done!")
+            }
+        }
+        console.log(index)
+    })
 }) //---------close document ready-----------------
     </script>
 {% endblock %} 
-

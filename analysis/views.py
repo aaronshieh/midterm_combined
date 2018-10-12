@@ -45,8 +45,8 @@ def editwatchlist(request):
     print("first editing on git....")
     return render(request,'analysis/editwatchlist.html',locals())
 
-def companyinfo(request):
-    return render(request,'analysis/companyinfo.html')
+def companyfinancials(request):
+    return render(request,'analysis/companyfinancials.html')
 
 def marketwatch(request):
     return render(request,'analysis/marketwatch.html')
