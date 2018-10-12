@@ -6,7 +6,7 @@ app_name='analysis'
 urlpatterns = [
     path('', views.index,),
     path('editwatchlist/', views.editwatchlist),
-    # path('companyinfo/', views.companyinfo),
+    path('companyfinancials/', views.companyfinancials),
     path('marketwatch/', views.marketwatch),
     path('dataupdate/', views.dataupdate),
     path('dataupdate/fillinstocklist', views.fillinstocklist),
