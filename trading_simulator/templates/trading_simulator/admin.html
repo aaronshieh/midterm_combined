@@ -204,6 +204,8 @@
         }).done(function(msg){
             console.log(msg)
             getCoins();
+        }).fail(function(err){
+            console.log(err);
         });
     });
 

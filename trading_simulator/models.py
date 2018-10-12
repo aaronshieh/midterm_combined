@@ -14,7 +14,7 @@ class account(models.Model):
 
 class coin(models.Model):
     coinId = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=40)
     symbol = models.CharField(max_length=10)
     cmcId = models.IntegerField()
 
